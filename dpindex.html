@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Daniel Paley</title>
+<meta name="description" content="Daniel Paley — Rutgers finance student interested in asset management and corporate finance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F2F4F1;
+    --ink: #1C2A39;
+    --muted: #5A6772;
+    --ledger: #2F6B4F;
+    --brass: #8A6D3B;
+    --rule: #C9D1D3;
+    --card: #FFFFFF;
+    --serif: "Spectral", Georgia, "Times New Roman", serif;
+    --sans: "Public Sans", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #141C24; --ink: #E6EAEC; --muted: #A2ADB5;
+      --ledger: #6FB592; --brass: #CDAE74; --rule: #2C3A47; --card: #1B2530;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-size: 1.0625rem; line-height: 1.6;
+    padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0);
+  }
+  a { color: var(--ledger); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; border-radius: 2px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; }
+  nav .mark { font-family: var(--serif); font-weight: 700; font-size: 1.25rem; text-decoration: none; color: var(--ink); }
+  nav ul { list-style: none; display: flex; gap: 22px; }
+  nav ul a { color: var(--muted); text-decoration: none; font-size: .95rem; }
+  nav ul a:hover { color: var(--ink); }
+
+  header.hero { padding: 72px 0 88px; border-bottom: 1px solid var(--rule); }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(2.8rem, 8vw, 5.5rem); line-height: 1.02; letter-spacing: -0.02em;
+  }
+  .hero p.lede { max-width: 34em; margin-top: 24px; font-size: 1.2rem; color: var(--muted); }
+  .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px; }
+  .btn {
+    display: inline-block; padding: 12px 22px; border-radius: 4px; font-weight: 600;
+    text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink);
+  }
+  .btn.primary { background: var(--ink); color: var(--paper); }
+
+  section { padding: 80px 0; border-bottom: 1px solid var(--rule); }
+  section h2 { font-family: var(--serif); font-size: 2rem; font-weight: 600; margin-bottom: 28px; }
+  .about p { max-width: 38em; margin-bottom: 16px; }
+
+  /* Tombstones: modeled on M&A deal announcements */
+  .tombstones { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .tomb {
+    background: var(--card); border: 1px solid var(--rule); border-top: 6px solid var(--brass);
+    padding: 32px 26px; text-align: center; display: flex; flex-direction: column; gap: 10px;
+  }
+  .tomb .org { font-family: var(--serif); font-size: 1.45rem; font-weight: 700; line-height: 1.2; }
+  .tomb .role { color: var(--brass); font-weight: 600; }
+  .tomb .when { color: var(--muted); font-size: .92rem; }
+  .tomb hr { border: 0; border-top: 1px solid var(--rule); width: 40%; margin: 8px auto; }
+  .tomb p { font-size: .97rem; text-align: left; }
+
+  .projects { display: grid; gap: 0; }
+  .project { display: grid; grid-template-columns: 1fr auto; gap: 8px 24px; padding: 24px 0; border-top: 1px solid var(--rule); }
+  .project:last-child { border-bottom: 1px solid var(--rule); }
+  .project h3 { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; }
+  .project p { grid-column: 1; color: var(--muted); max-width: 40em; }
+  .project .tags { grid-column: 1; font-size: .88rem; color: var(--ledger); font-weight: 500; }
+  .project a.repo { grid-row: 1 / span 3; grid-column: 2; align-self: center; font-weight: 600; }
+
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; }
+  .skills h3 { font-family: var(--serif); font-size: 1.15rem; margin-bottom: 8px; }
+  .skills ul { list-style: none; color: var(--muted); }
+  .skills li { padding: 3px 0; }
+
+  .contact { border-bottom: 0; }
+  .contact p { max-width: 34em; margin-bottom: 24px; }
+  footer { padding: 32px 0 48px; color: var(--muted); font-size: .9rem; }
+
+  @media (max-width: 640px) {
+    nav ul { gap: 14px; }
+    nav ul li:nth-child(n+3) { display: none; }
+    header.hero { padding: 40px 0 64px; }
+    section { padding: 56px 0; }
+    .project { grid-template-columns: 1fr; }
+    .project a.repo { grid-row: auto; grid-column: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="Main">
+    <a class="mark" href="#top">DP</a>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <h1>Daniel Paley</h1>
+    <p class="lede">Sophomore studying finance at Rutgers University Honors College, interested in a career in asset management or corporate finance.</p>
+    <div class="actions">
+      <a class="btn primary" href="#experience">See my experience</a>
+      <a class="btn" href="resume.pdf">Download résumé</a>
+    </div>
+  </header>
+
+  <section class="about" id="about">
+    <h2>About</h2>
+    <p>My name is Daniel Paley, and I'm a sophomore studying finance at Rutgers University Honors College (3.9 GPA, Dean's List). I'm interested in pursuing a career in asset management or corporate finance.</p>
+    <p>This past summer I interned in M&amp;A at a sell-side advisory firm. At Rutgers I'm a fund analyst with TAMID, where my stock pitch was picked for the national fund, and treasurer of the ski team.</p>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <div class="tombstones">
+      <article class="tomb">
+        <div class="org">MP Advisory</div>
+        <div class="role">Mergers &amp; Acquisitions Intern</div>
+        <div class="when">May – Aug 2026 | New York, NY</div>
+        <hr>
+        <p>Built a 100+ company buyer universe and ran outreach for active sell-side deals. Created CIMs and sales decks shown to 10+ prospective buyers, and led research ranking 8 sectors to find new verticals.</p>
+      </article>
+      <article class="tomb">
+        <div class="org">TAMID Group</div>
+        <div class="role">Fund Analyst</div>
+        <div class="when">Sep 2025 – Present | Rutgers</div>
+        <hr>
+        <p>Equity research and valuation to build investment theses. Selected as 1 of 5 winning pitches bought by TAMID's $100,000 national portfolio. Present weekly market updates to the fund.</p>
+      </article>
+      <article class="tomb">
+        <div class="org">New Bridge Medical Center</div>
+        <div class="role">Finance / Payroll Intern</div>
+        <div class="when">Oct 2024 – Aug 2025 | Paramus, NJ</div>
+        <hr>
+        <p>Built Excel tools to manage $10,000+ in bonus compensation and ran payroll variance analysis on labor cost drivers like overtime and bonuses.</p>
+      </article>
+      <article class="tomb">
+        <div class="org">Rutgers Ski Team</div>
+        <div class="role">Treasurer</div>
+        <div class="when">Feb 2026 – Present</div>
+        <hr>
+        <p>Manage the team budget, fees, and expenses. Built forecasting models accurate to within 10% of actuals and organized 6+ fundraisers raising $5,000 per semester.</p>
+      </article>
+    </div>
+    <p style="margin-top:28px;color:var(--muted);max-width:40em">Also: Shift Lead at Cold Stone Creamery (2024–2025) and Senior Ski Instructor at Campgaw Mountain (2022–2025), where I trained 40+ new instructors.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="projects">
+      <!-- TODO: point each link at a real repo or file, or remove the link -->
+      <div class="project">
+        <h3>JAZZ stock pitch — Bender Competition</h3>
+        <p>Fundamental and comparables analysis of Jazz Pharmaceuticals, with a forward income statement and DCF projecting 18%–22% 12-month upside. Presented and defended the buy thesis to a judging panel.</p>
+        <div class="tags">DCF · Comps · Equity research</div>
+        <a class="repo" href="https://github.com/YOUR-USERNAME/jazz-stock-pitch">View project</a>
+      </div>
+      <div class="project">
+        <h3>TAMID winning stock pitch</h3>
+        <p>Investment thesis selected as one of five pitches purchased by TAMID's $100,000 national investment portfolio.</p>
+        <div class="tags">Valuation · Investment thesis</div>
+        <a class="repo" href="https://github.com/YOUR-USERNAME/tamid-pitch">View project</a>
+      </div>
+      <div class="project">
+        <h3>Ski team budget forecast</h3>
+        <p>Excel model forecasting club revenues and expenses each semester, tracking within 10% of actual results.</p>
+        <div class="tags">Excel · Forecasting</div>
+        <a class="repo" href="https://github.com/YOUR-USERNAME/ski-team-budget">View project</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div>
+        <h3>Technical</h3>
+        <ul><li>Microsoft Excel (VLOOKUP, formulas, data analysis)</li><li>Bloomberg Terminal (intermediate)</li><li>DCF and comparables analysis</li></ul>
+      </div>
+      <div>
+        <h3>Certifications</h3>
+        <ul><li>Bloomberg Market Concepts</li><li>WSP Excel &amp; Accounting</li><li>WSP Financial Statement Analysis</li></ul>
+      </div>
+      <div>
+        <h3>Languages</h3>
+        <ul><li>English (fluent)</li><li>Russian (fluent)</li></ul>
+      </div>
+      <div>
+        <h3>Activities</h3>
+        <ul><li>Delta Sigma Pi</li><li>Corporate Finance Society</li><li>FBLA</li><li>Outdoors Club</li></ul>
+      </div>
+    </div>
+    <p style="margin-top:28px;color:var(--muted);max-width:40em">Outside of finance: skiing, hiking (New Hampshire, West Virginia, Colorado), camping, tennis, guitar, and 90s/2000s rock concerts.</p>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact</h2>
+    <p>I'm open to internship conversations and coffee chats in asset management and corporate finance.</p>
+    <div class="actions">
+      <a class="btn primary" href="mailto:danielpaley07@gmail.com">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/YOUR-LINKEDIN">LinkedIn</a>
+      <a class="btn" href="https://github.com/YOUR-USERNAME">GitHub</a>
+    </div>
+  </section>
+
+  <footer>© 2026 Daniel Paley</footer>
+</div>
+</body>
+</html>
